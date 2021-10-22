@@ -1,0 +1,18 @@
+# PHP
+alias sail="./vendor/bin/sail"
+
+# Git
+alias g="git"
+alias gc="git checkout"
+alias gpo="git push origin"
+alias gm="git merge"
+alias ga="git add ."
+alias gcm='git commit -m"$1"'
+
+# Terraform
+alias tf="terraform"
+alias tfw="terraform workspace"
+
+# System
+alias ll="ls -laF"
+alias psaux="ps -aux | grep $1"

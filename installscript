@@ -1,0 +1,66 @@
+#!/bin/bash
+[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+# Install zsh
+echo 'Install oh-my-zsh'
+echo '-----------------'
+rm -rf $HOME/.oh-my-zsh
+curl -L https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+
+# Symlink zsh prefs
+rm $HOME/.zshrc
+ln -s $HOME/.dotfiles/shell/.zshrc $HOME/.zshrc
+
+# Symlink vim prefs
+rm $HOME/.vimrc
+ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
+
+rm $HOME/.vim
+ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
+
+# Install curl
+apt install curl
+
+# Install Rgrep
+apt install ripgrep
+
+#Install NVM for Nodejs
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
+
+#Install zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+#Setup Mysql
+apt install mysql-server
+systemctl disable mysql
+
+# Install sublime
+wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
+apt-get install apt-transport-https
+echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
+apt update
+apt install sublime-text
+
+# Setup terminal colors
+echo 'Setting up terminal profiles'
+echo '-----------------'
+
+mkdir ~/.terminal
+wget -O ~/.terminal/onehalfdark.sh https://raw.githubusercontent.com/sonph/onehalf/master/gnome-terminal/onehalfdark.sh 
+wget -O ~/.terminal/onehalflight.sh https://raw.githubusercontent.com/sonph/onehalf/master/gnome-terminal/onehalflight.sh
+
+# Exit 0 is default for the script so to ensure we keep the script running after soruce we wish to return instead of exit
+sed -i 's\exit 0\return\g' ~/.terminal/onehalfdark.sh 
+sed -i 's\exit 0\return\g' ~/.terminal/onehalflight.sh 
+
+source ~/.terminal/onehalfdark.sh 
+source ~/.terminal/onehalflight.sh 
+
+echo '++++++++++++++++++++++++++++++'
+echo '++++++++++++++++++++++++++++++'
+echo 'All done!'
+echo 'Things to do to make the one-half terminal theme work:'
+
+echo '1. Go to your Terminal prefences and set your default theme (one half dark for same as VI theme)'
+
+echo '++++++++++++++++++++++++++++++'
+echo '++++++++++++++++++++++++++++++'
