@@ -1,5 +1,5 @@
 #!/bin/bash
-[ "$UID" -eq 0 ] || exec sudo bash "$0" "$@"
+
 # Install zsh
 echo 'Install oh-my-zsh'
 echo '-----------------'
@@ -18,10 +18,13 @@ rm $HOME/.vim
 ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 
 # Install curl
-apt install curl
+apt install curl -y
+
+# Install vim
+apt install vim -y
 
 # Install Rgrep
-apt install ripgrep
+apt install ripgrep -y
 
 #Install NVM for Nodejs
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
@@ -30,7 +33,7 @@ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 #Setup Mysql
-apt install mysql-server
+apt install mysql-server -y
 systemctl disable mysql
 
 # Install sublime
