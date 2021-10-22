@@ -64,6 +64,7 @@ echo 'All done!'
 echo 'Things to do to make the one-half terminal theme work:'
 
 echo '1. Go to your Terminal prefences and set your default theme (one half dark for same as VI theme)'
+echo '2. Go to VIM and run :PlugInstall'
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'

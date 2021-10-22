@@ -25,9 +25,6 @@ Plug 'honza/vim-snippets'
 Plug 'junegunn/goyo.vim'
 Plug 'amix/vim-zenroom2'
 
-
-
-
 call plug#end()
 set rtp+=~/.fzf
 
