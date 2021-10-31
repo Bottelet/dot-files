@@ -12,4 +12,4 @@
     master = checkout master
     prp = !git pull --rebase && git push
 [submodule]
-	recurse = false
+    recurse = false
