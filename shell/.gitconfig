@@ -1,0 +1,15 @@
+[user]
+	email = cbottelet@gmail.com
+	name = Casper Bottelet
+[alias]
+    co = checkout
+    cp = cherry-pick
+    br = branch
+    st = status
+    ul = push -u origin HEAD
+    loll = log --graph --decorate --pretty=oneline --abbrev-commit
+    develop = checkout develop
+    master = checkout master
+    prp = !git pull --rebase && git push
+[submodule]
+	recurse = false

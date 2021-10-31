@@ -17,6 +17,9 @@ ln -s $HOME/.dotfiles/shell/.vimrc $HOME/.vimrc
 rm $HOME/.vim
 ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 
+rm $HOME/.gitconfig
+ln -s $HOME/.dotfiles/shell/.gitconfig $HOME/.gitconfig
+
 # Install curl
 apt install curl -y
 

@@ -16,3 +16,10 @@ alias tfw="terraform workspace"
 # System
 alias ll="ls -laF"
 alias psaux="ps -aux | grep $1"
+alias cdp="cd ~/Projects/"
+
+# Docker
+alias d="docker"
+alias dc="docker-compose"
+alias dcu="docker-compose up -d"
+alias dcd="docker-compose down"
