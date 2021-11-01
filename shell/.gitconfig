@@ -9,7 +9,12 @@
     ul = push -u origin HEAD
     loll = log --graph --decorate --pretty=oneline --abbrev-commit
     develop = checkout develop
+    main = checkout main
     master = checkout master
     prp = !git pull --rebase && git push
+[pull]
+	rebase = false
+[push]
+    default = simple
 [submodule]
     recurse = false
