@@ -238,6 +238,7 @@ let g:startify_bookmarks = [
             \ { 'z': '~/.zshrc' },
             \ { 'a': '~/.dotfiles/shell/.aliases' },
             \ { 'f': '~/.dotfiles/shell/.functions' },
+            \ { 'c': '~/.dotfiles-custom/shell/.zshrc' },
             \ { 'g': '~/.gitconfig' },
             \ ]
 let g:startify_enable_special      = 0

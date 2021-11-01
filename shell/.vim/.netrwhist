@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/bottelet/Projects/app-ci/src'
+let g:netrw_dirhist_6='/home/bottelet/Projects/app-ci/src/jobs'
+let g:netrw_dirhist_5='/home/bottelet/Projects/app-ci/src'
+let g:netrw_dirhist_4='/home/bottelet/Projects/infrastructure/eventbridge/terraform'
+let g:netrw_dirhist_3='/home/bottelet/Projects/infrastructure/eventbridge'
+let g:netrw_dirhist_2='/home/bottelet/Projects/infrastructure/eventbridge/terraform'
+let g:netrw_dirhist_1='/home/bottelet/Projects/infrastructure/eventbridge'
