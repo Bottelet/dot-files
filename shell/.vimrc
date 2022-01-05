@@ -13,6 +13,10 @@ Plug 'vim-syntastic/syntastic'
 Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'mhinz/vim-startify'
+Plug 'mg979/vim-localhistory'
+Plug 'mbbill/undotree'
+" Undo Tree same as ^ on steroids but uses Python 
+"Plug 'simnalamburt/vim-mundo'
 
 "Snipmate dependencies
 Plug 'garbas/vim-snipmate'
@@ -40,6 +44,7 @@ syntax on
 set cursorline
 let g:airline_theme='onehalfdark'
 colorscheme onehalfdark
+
 " lightline
 let g:lightline = { 
             \ 'colorscheme': 'onehalfdark',
@@ -107,6 +112,20 @@ autocmd cursormoved * set hlsearch
 map <leader>s :noh<CR>
 map <leader>so :source ~/.vimrc<CR>
 map <leader>ev :e ~/.vimrc<CR>
+
+" term
+" vim-powered terminal in split window
+map <Leader>t :term ++close<cr>
+tmap <Leader>t <c-w>:term ++close<cr>
+
+" vim-powered terminal in new tab
+map <Leader>T :tab term ++close<cr>
+tmap <Leader>T <c-w>:tab term ++close<cr>
+
+tnoremap <C-J> <C-W><C-J>
+tnoremap <C-K> <C-W><C-K>
+tnoremap <C-L> <C-W><C-L>
+tnoremap <C-H> <C-W><C-H>
 
 "map <leader>f :FZF<CR>
 map <C-f> :Rg<CR>
@@ -247,3 +266,39 @@ let g:startify_relative_path       = 0
 let g:startify_change_to_dir       = 1
 let g:startify_session_autoload    = 1
 let g:startify_session_persistence = 1
+
+" UndoTreeToggle
+nnoremap <silent> <leader>u :UndotreeToggle<CR>
+let g:undotree_WindowLayout = 2 
+
+if has("persistent_undo")
+   let target_path = expand('~/.undodir')
+
+    " create the directory and any parent directories
+    " if the location does not exist.
+    if !isdirectory(target_path)
+        call mkdir(target_path, "p", 0700)
+    endif
+
+    let &undodir=target_path
+    set undofile
+endif
+
+" MundoToggle
+"set undofile
+"set undodir=~/.undodir
+"nnoremap <silent> <leader>u :MundoToggle<CR>
+
+" Local history
+let g:lh_basedir = '~/.vim_history'
+" <leader> + prefix in use
+" + l = load backups
+" + b = browse backups
+" + w = write backups
+" + d = select backup and diff
+" + x = delete backup for current dir
+let g:lh_mappings_prefix = 'gh'
+let g:lh_autobackup_first = 1
+let g:lh_autobackup_size  = 51200
+let g:lh_autobackup_frequency = 1
+
