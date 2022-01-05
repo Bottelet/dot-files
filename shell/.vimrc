@@ -115,7 +115,8 @@ map <leader>ev :e ~/.vimrc<CR>
 
 " term
 " vim-powered terminal in split window
-map <Leader>t :term ++close<cr>
+map <Leader>vt :vert bo term ++close<cr>
+map <Leader>st :term ++close<cr>
 tmap <Leader>t <c-w>:term ++close<cr>
 
 " vim-powered terminal in new tab
