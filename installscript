@@ -30,7 +30,7 @@ apt install vim -y
 apt install ripgrep -y
 
 #Install NVM for Nodejs
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
 #Install zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
@@ -46,20 +46,46 @@ echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sou
 apt update
 apt install sublime-text
 
+#Setup custom backgrounds with cron
+read -p "Setup rotating backgrounds? " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    # Create folder
+    folder="${HOME}/Pictures/desktop-wallpapers"
+    mkdir $folder
+
+    # Get Images
+    wget -P $folder https://cdn.osxdaily.com/wp-content/uploads/2020/12/macos-big-sur-updated-wallpapers-19.jpg
+    wget -P $folder https://cdn.osxdaily.com/wp-content/uploads/2020/12/macos-big-sur-updated-wallpapers-24.jpg
+    wget -P $folder https://cdn.osxdaily.com/wp-content/uploads/2020/12/macos-big-sur-updated-wallpapers-26.jpg
+    wget -P $folder https://cdn.osxdaily.com/wp-content/uploads/2020/12/macos-big-sur-updated-wallpapers-27.jpg
+    wget -P $folder https://cdn.osxdaily.com/wp-content/uploads/2020/12/macos-big-sur-updated-wallpapers-33.jpg
+    wget -P $folder https://cdn.osxdaily.com/wp-content/uploads/2020/12/macos-big-sur-updated-wallpapers-32.jpg
+
+    # Setup crontab
+    crontab -l > cron_bkp
+    echo "0 * * * * env DISPLAY=:0 DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus /$HOME/.dotfiles/scripts/change-wallpaper.sh" >> cron_bkp
+    crontab cron_bkp
+    echo "Crontab installed"
+else
+    echo "Custom rotating wallpapers not setup"
+fi
+
 # Setup terminal colors
 echo 'Setting up terminal profiles'
 echo '-----------------'
 
 mkdir ~/.terminal
-wget -O ~/.terminal/onehalfdark.sh https://raw.githubusercontent.com/sonph/onehalf/master/gnome-terminal/onehalfdark.sh 
+wget -O ~/.terminal/onehalfdark.sh https://raw.githubusercontent.com/sonph/onehalf/master/gnome-terminal/onehalfdark.sh
 wget -O ~/.terminal/onehalflight.sh https://raw.githubusercontent.com/sonph/onehalf/master/gnome-terminal/onehalflight.sh
 
 # Exit 0 is default for the script so to ensure we keep the script running after soruce we wish to return instead of exit
-sed -i 's\exit 0\return\g' ~/.terminal/onehalfdark.sh 
-sed -i 's\exit 0\return\g' ~/.terminal/onehalflight.sh 
+sed -i 's\exit 0\return\g' ~/.terminal/onehalfdark.sh
+sed -i 's\exit 0\return\g' ~/.terminal/onehalflight.sh
 
-source ~/.terminal/onehalfdark.sh 
-source ~/.terminal/onehalflight.sh 
+source ~/.terminal/onehalfdark.sh
+source ~/.terminal/onehalflight.sh
 
 echo '++++++++++++++++++++++++++++++'
 echo '++++++++++++++++++++++++++++++'
