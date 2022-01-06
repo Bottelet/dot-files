@@ -29,6 +29,9 @@ apt install vim -y
 # Install Rgrep
 apt install ripgrep -y
 
+# Figlet Ascii art https://www.tecmint.com/create-ascii-text-banners-in-linux-terminal/
+apt install figlet -y
+
 #Install NVM for Nodejs
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 

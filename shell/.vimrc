@@ -254,7 +254,7 @@ let g:snipMate = { 'snippet_version' : 1 }
 
 "Startify
 let g:startify_custom_footer =
-           \ ['', "   I will at some point figure out a cool text to put here!", '']
+           \ ["Me: Will you be my Valentine", "Girl: No way!", "Me: sudo Will you be my Valentine", "Girl: yes..yes..yes! Let's go"]
 let g:startify_bookmarks = [
             \ { 'v': '~/.vimrc' },
             \ { 'z': '~/.zshrc' },
