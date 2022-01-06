@@ -15,7 +15,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'mhinz/vim-startify'
 Plug 'mg979/vim-localhistory'
 Plug 'mbbill/undotree'
-" Undo Tree same as ^ on steroids but uses Python 
+" Undo Tree same as ^ on steroids but uses Python
 "Plug 'simnalamburt/vim-mundo'
 
 "Snipmate dependencies
@@ -46,14 +46,13 @@ let g:airline_theme='onehalfdark'
 colorscheme onehalfdark
 
 " lightline
-let g:lightline = { 
+let g:lightline = {
             \ 'colorscheme': 'onehalfdark',
             \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             [ 'readonly', 'filename', 'modified' ] ]
             \ },
             \}
-
 set guifont=menlo\ for\ powerline:h16
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
@@ -102,6 +101,9 @@ nmap <C-l> <C-w>l
 nmap vs :vsplit<cr>
 nmap sp :split<cr>
 
+" qq to record, Q to replay
+nnoremap Q @q
+
 " Swap files out of the project root
 set backupdir=~/.vim/backup//
 set directory=~/.vim/swap//
@@ -117,14 +119,15 @@ map <leader>ev :e ~/.vimrc<CR>
 " vim-powered terminal in split window
 map <Leader>vt :vert bo term ++close<cr>
 map <Leader>st :term ++close<cr>
-tmap <Leader>t <c-w>:term ++close<cr>
+tmap <Leader>st <c-w>:term ++close<cr>
 
 " vim-powered terminal in new tab
 map <Leader>T :tab term ++close<cr>
 tmap <Leader>T <c-w>:tab term ++close<cr>
 
-tnoremap <C-J> <C-W><C-J>
-tnoremap <C-K> <C-W><C-K>
+" Only doing left and right, else FZF gets messed up on file selection
+"tnoremap <C-J> <C-W><C-J>
+"tnoremap <C-K> <C-W><C-K>
 tnoremap <C-L> <C-W><C-L>
 tnoremap <C-H> <C-W><C-H>
 
@@ -201,15 +204,14 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 xmap <leader>r  <Plug>(coc-format-selected)
 nmap <leader>r  <Plug>(coc-format-selected)
 
-
-" Git fugitive 
+" Git fugitive
 nmap <leader>gb :Git blame<cr>
 nmap <leader>gs :Git status<cr>
 nmap <leader>gd :Git diff<cr>
 nmap <leader>gc :Git commit<cr>
 
 " Nerdcommenter
-nnoremap <leader>cc V}:call nerdcommenter#Comment('x', 'toggle')<CR> 
+nnoremap <leader>cc V}:call nerdcommenter#Comment('x', 'toggle')<CR>
 nnoremap <leader>c<space> V}:call nerdcommenter#Comment('x', 'comment')<CR>
 "https://github.com/preservim/nerdcommenter#default-mappings
 
@@ -270,7 +272,7 @@ let g:startify_session_persistence = 1
 
 " UndoTreeToggle
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
-let g:undotree_WindowLayout = 2 
+let g:undotree_WindowLayout = 2
 
 if has("persistent_undo")
    let target_path = expand('~/.undodir')
@@ -302,4 +304,42 @@ let g:lh_mappings_prefix = 'gh'
 let g:lh_autobackup_first = 1
 let g:lh_autobackup_size  = 51200
 let g:lh_autobackup_frequency = 1
+
+" ============================================================================
+" FUNCTIONS & COMMANDS {{{
+" ============================================================================
+
+" ----------------------------------------------------------------------------
+" :Chomp
+" ----------------------------------------------------------------------------
+command! Chomp %s/\s\+$// | normal! ``
+
+" ----------------------------------------------------------------------------
+" :Count
+" ----------------------------------------------------------------------------
+command! -nargs=1 Count execute printf('%%s/%s//gn', escape(<q-args>, '/')) | normal! ``
+
+" ----------------------------------------------------------------------------
+" call LSD()
+" ----------------------------------------------------------------------------
+function! LSD()
+  syntax clear
+
+  for i in range(16, 255)
+    execute printf('highlight LSD%s ctermfg=%s', i - 16, i)
+  endfor
+
+  let block = 4
+  for l in range(1, line('$'))
+    let c = 1
+    let max = len(getline(l))
+    while c < max
+      let stride = 4 + reltime()[1] % 8
+      execute printf('syntax region lsd%s_%s start=/\%%%sl\%%%sc/ end=/\%%%sl\%%%sc/ contains=ALL', l, c, l, c, l, min([c + stride, max]))
+      let rand = abs(reltime()[1] % (256 - 16))
+      execute printf('hi def link lsd%s_%s LSD%s', l, c, rand)
+      let c += stride
+    endwhile
+  endfor
+endfunction
 
