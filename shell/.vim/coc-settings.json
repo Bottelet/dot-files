@@ -1,5 +1,15 @@
 {
+  "diagnostic.checkCurrentLine": true,
+  "coc.preferences.jumpCommand": "drop",
   "languageserver": {
+    "intelephense": {
+      "command": "intelephense",
+       "args": ["--stdio"],
+       "filetypes": ["php"],
+       "initializationOptions": {
+         "storagePath": "/tmp/intelephense"
+       }
+    },
     "go": {
       "command": "gopls",
       "rootPatterns": ["go.mod"],

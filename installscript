@@ -38,6 +38,10 @@ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 #Install zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
+# Install intelephense https://github.com/bmewburn/intelephense-docs
+# For vim PHP intelephese
+npm i intelephense -g
+
 #Setup Mysql
 apt install mysql-server -y
 systemctl disable mysql
