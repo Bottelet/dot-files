@@ -73,7 +73,7 @@ set shiftround                  " use multiple of shiftwidth when indenting with
 set backspace=indent,eol,start  " allow backspacing over everything in insert mode
 set autoindent                  " always set autoindenting on
 set copyindent                  " copy the previous indentation on autoindenting
-set number                      " always show line numbers
+set number relativenumber       " always show line relative and absolute numbers
 set ignorecase                  " ignore case when searching
 set smartcase                   " ignore case if search pattern is all lowercase,
 set timeout timeoutlen=400 ttimeoutlen=200
@@ -115,6 +115,14 @@ autocmd cursormoved * set hlsearch
 map <leader>s :noh<CR>
 map <leader>so :source ~/.vimrc<CR>
 map <leader>ev :e ~/.vimrc<CR>
+"Switch betwwen hybird numbers command
+" Automatically switch for insert mode and if buffer is 
+map <leader>ln :set relativenumber!<CR>
+augroup numbertoggle
+  autocmd!
+  autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if &nu && mode() != "i" | set rnu   | endif
+  autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if &nu                  | set nornu | endif
+augroup END
 
 " term
 " vim-powered terminal in split window
@@ -166,7 +174,7 @@ inoremap <silent><expr> <TAB>
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
-  inoremap <silent><expr> <c-@> coc#refresh()
+  ioremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Allow for tab and shift tab to move in suggestions list
@@ -207,8 +215,8 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Formatting selected code.
-xmap <leader>r  <Plug>(coc-format-selected)
-nmap <leader>r  <Plug>(coc-format-selected)
+xmap <leader>r <Plug>(coc-format-selected)
+nmap <leader>r <Plug>(coc-format-selected)
 
 " Mappings for CoCList
 " Show all diagnostics.
