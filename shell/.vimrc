@@ -174,7 +174,7 @@ inoremap <silent><expr> <TAB>
 if has('nvim')
   inoremap <silent><expr> <c-space> coc#refresh()
 else
-  ioremap <silent><expr> <c-@> coc#refresh()
+  inoremap <silent><expr> <c-@> coc#refresh()
 endif
 
 " Allow for tab and shift tab to move in suggestions list
