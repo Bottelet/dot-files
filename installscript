@@ -20,8 +20,18 @@ ln -s $HOME/.dotfiles/shell/.vim $HOME/.vim
 rm $HOME/.gitconfig
 ln -s $HOME/.dotfiles/shell/.gitconfig $HOME/.gitconfig
 
+
+#Setup for Pyenv
+apt install -y make build-essential libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev wget llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev
+
 # Install curl
 apt install curl -y
+
+# Install wget
+apt install wget -y
+
+# Install git
+apt install git -y
 
 # Install vim
 apt install vim -y
