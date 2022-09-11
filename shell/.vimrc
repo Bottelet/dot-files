@@ -14,9 +14,8 @@ Plug 'mg979/vim-visual-multi', {'branch': 'master'}
 Plug 'editorconfig/editorconfig-vim'
 Plug 'mhinz/vim-startify'
 Plug 'mg979/vim-localhistory'
+Plug 'github/copilot.vim'
 Plug 'mbbill/undotree'
-" Undo Tree same as ^ on steroids but uses Python
-"Plug 'simnalamburt/vim-mundo'
 
 "Snipmate dependencies
 Plug 'garbas/vim-snipmate'
@@ -154,8 +153,10 @@ map <leader>2 :NERDTreeFind<CR>
 let g:fzf_filemru_bufwrite = 1
 let g:fzf_filemru_git_ls = 1
 let g:fzf_filemru_ignore_submodule = 1
-let g:fzf_layout = { 'down': '25%' }
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8, 'xoffset': 0.5, 'yoffset': 0.5} }
+"let g:fzf_layout = { 'down': '25%' }
 map <leader>map :Maps<CR>
+let g:fzf_preview_window = ['right:60%', 'ctrl-/']
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -296,6 +297,16 @@ let g:startify_change_to_dir       = 1
 let g:startify_session_autoload    = 1
 let g:startify_session_persistence = 1
 
+"Copilot
+let g:copilot_node_command = "~/.nvm/versions/node/v16.15.0/bin/node"
+"imap <silent><script><expr> <C-e> copilot#Accept('\<CR>')
+"let g:copilot_no_tab_map = v:true                        
+highlight CopilotSuggestion guifg=#e0deaf ctermfg=8
+let g:copilot_filetypes = {
+      \ 'php': v:true,
+      \ }
+
+
 " UndoTreeToggle
 nnoremap <silent> <leader>u :UndotreeToggle<CR>
 let g:undotree_WindowLayout = 2
@@ -344,28 +355,4 @@ command! Chomp %s/\s\+$// | normal! ``
 " :Count
 " ----------------------------------------------------------------------------
 command! -nargs=1 Count execute printf('%%s/%s//gn', escape(<q-args>, '/')) | normal! ``
-
-" ----------------------------------------------------------------------------
-" call LSD()
-" ----------------------------------------------------------------------------
-function! LSD()
-  syntax clear
-
-  for i in range(16, 255)
-    execute printf('highlight LSD%s ctermfg=%s', i - 16, i)
-  endfor
-
-  let block = 4
-  for l in range(1, line('$'))
-    let c = 1
-    let max = len(getline(l))
-    while c < max
-      let stride = 4 + reltime()[1] % 8
-      execute printf('syntax region lsd%s_%s start=/\%%%sl\%%%sc/ end=/\%%%sl\%%%sc/ contains=ALL', l, c, l, c, l, min([c + stride, max]))
-      let rand = abs(reltime()[1] % (256 - 16))
-      execute printf('hi def link lsd%s_%s LSD%s', l, c, rand)
-      let c += stride
-    endwhile
-  endfor
-endfunction
 
