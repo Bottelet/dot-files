@@ -141,8 +141,8 @@ tnoremap <C-H> <C-W><C-H>
 
 "map <leader>f :FZF<CR>
 map <C-f> :Rg<CR>
-nnoremap <silent> <C-p> :Files<CR>
-map <leader>f :FZF<CR>
+nnoremap <silent> <C-p> :GFiles<CR>
+map <leader>f :Files<CR>
 
 nmap <silent> <leader>h :History<CR>
 
