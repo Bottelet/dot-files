@@ -42,6 +42,9 @@ apt install ripgrep -y
 # Figlet Ascii art https://www.tecmint.com/create-ascii-text-banners-in-linux-terminal/
 apt install figlet -y
 
+# Install bat used to make syntax highlight worn in FZF preview https://github.com/junegunn/fzf.vim/pull/1189#issuecomment-748650978
+apt install bat -y
+
 #Install NVM for Nodejs
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
